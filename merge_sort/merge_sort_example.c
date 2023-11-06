@@ -8,10 +8,35 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "../util/array_util.h"
 #include "merge_sort.h"
 
-int main() {    
+int from_file(char*);
+void interactive();
+
+int main(int argc, char** argv) {
+    if (argc > 2) {
+        printf("\nToo many arguments!\n\n");
+        return -1;
+    } else if (argc == 2) {
+        char* file_name = argv[1];
+        return from_file(file_name);
+    }
+    interactive();
+    return 0;
+}
+
+int from_file(char* file_name) {
+    FILE* file = fopen(file_name, "r");
+    if (file == NULL) {
+        printf("Error opening file %s!\n", file_name);
+        return -1;
+    }
+    return 0;
+}
+
+void interactive() {
     printf("\nSort an array with the merge sort algorithm!\n\n");
 
     // get array data (array size is stored at array_data[0])
@@ -28,7 +53,7 @@ int main() {
     sort(array, 0, array_size - 1);
     
     printf("\nSorted array output:\n");
-    print_array(array, array_size);
+    print_array(array, array_size);     
     printf("\nArray successfully sorted!\n\n");
-    return 0;
+    free(array_data);
 }
