@@ -7,6 +7,7 @@
 
 
 
+// conduct a binary search 
 int binary_search(int* array, int left, int right, int target) {
     if (left <= right) {
         int middle = (left + right) / 2;
